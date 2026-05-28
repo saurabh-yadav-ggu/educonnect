@@ -5,7 +5,10 @@ from database import engine
 from routes import router
 
 # Create DB tables
-models.Base.metadata.create_all(bind=engine)
+try:
+    models.Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Failed to create database tables on startup: {e}")
 
 app = FastAPI(title="EduConnect Smart Classroom Ecosystem API")
 
